@@ -4,43 +4,43 @@ on:
     branches:
       - master
 jobs:
-  - xcodebuildOptions:
-      name: Options
-      runos: macos-latest
-      steps:
-        - name: Test
-          run: |
-            sudo xcode-select -s '/Applications/Xcode_13.2.1.app/Contents/Developer'
-            xcodebuild -usage
-  - build:
-      name: build
-      runs-on: macos-latest
-      steps:
-        - uses: actions/checkout@master
+  xcodebuildOptions:
+    name: Options
+    runos: macos-latest
+    steps:
+      - name: Test
+        run: |
+          sudo xcode-select -s '/Applications/Xcode_13.2.1.app/Contents/Developer'
+          xcodebuild -usage
+  build:
+    name: build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
 
-        - name: Restore Cache
-          uses: actions/cache@v2
-          with:
-            path: /tmp/.siv3d-cache
-            key: ${{ runner.os }}-siv3d-${{ github.sha }}
-            restore-keys: |
-              ${{ runner.os }}-siv3d-
+      - name: Restore Cache
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.siv3d-cache
+          key: ${{ runner.os }}-siv3d-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-siv3d-
 
-        - name: Download Boost
-          run: |
-            curl -OL "https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.gz"
-            tar -zxvf boost_1_74_0.tar.gz
-            cp -r  boost_1_74_0/boost/ Dependencies/boost_1_74_0/boost
+      - name: Download Boost
+        run: |
+          curl -OL "https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.gz"
+          tar -zxvf boost_1_74_0.tar.gz
+          cp -r  boost_1_74_0/boost/ Dependencies/boost_1_74_0/boost
 
-        - name: Build
-          run: |
-            sudo xcode-select -s '/Applications/Xcode_13.2.1.app/Contents/Developer'
-            cd macOS
-            xcodebuild -project OpenSiv3D.xcodeproj -target Siv3D
+      - name: Build
+        run: |
+          sudo xcode-select -s '/Applications/Xcode_13.2.1.app/Contents/Developer'
+          cd macOS
+          xcodebuild -project OpenSiv3D.xcodeproj -target Siv3D
 
-        - name: Build Application
-          run: |
-            cd macOS
-            xcodebuild -project OpenSiv3D.xcodeproj -target Siv3D-Test
+      - name: Build Application
+        run: |
+          cd macOS
+          xcodebuild -project OpenSiv3D.xcodeproj -target Siv3D-Test
 
 
