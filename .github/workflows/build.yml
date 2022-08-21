@@ -21,7 +21,7 @@ jobs:
 
       - name: Download Boost
         run: |
-          curl -OL https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.gz \
+          curl -OL "https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.gz" \
           tar -zxvf boost_1_74_0.tar.gz \
           cp -r  boost_1_74_0/boost/ Dependencies/boost_1_74_0/boost \
 
