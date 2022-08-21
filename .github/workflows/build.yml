@@ -6,7 +6,7 @@ on:
 jobs:
   xcodebuildOptions:
     name: Options
-    runos: macos-latest
+    runs-on: macos-latest
     steps:
       - name: Test
         run: |
