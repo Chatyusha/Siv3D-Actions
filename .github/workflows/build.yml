@@ -45,5 +45,12 @@ jobs:
           cd macOS
           xcodebuild -project OpenSiv3D.xcodeproj -target Siv3D-Test -sdk macosx12.3 || true
 
+      - name: Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Application
+          path: ./macOS/Siv3D-Test.app
+
+
 
 
